@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 from pylab import *
 
-data = genfromtxt('sp161211_positions.txt')
+case = 'sp161211-b2'
+data = genfromtxt('%s_positions.txt' % case)
 plot(data[:,0], data[:,1::2])
-show()
+savefig('%s_positions.png' % case)

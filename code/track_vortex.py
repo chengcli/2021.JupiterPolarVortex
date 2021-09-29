@@ -4,16 +4,17 @@ from netCDF4 import Dataset
 import scipy.ndimage.filters as filters
 
 # read data
-data = Dataset('../data/sp161211-b1-main.nc', 'r')
+case = 'sp161211-b2'
+data = Dataset('../data/%s-main.nc' % case, 'r')
 x1 = data['x1'][:]
 x2 = data['x2'][:]
 pv = data['pv'][:,:,:,0]
 
 # find all local maximum
-it = 14
+it = 159
 pv_max = filters.maximum_filter(pv[it,:,:], 10, mode = 'wrap')
 pv_min = filters.minimum_filter(pv[it,:,:], 10, mode = 'wrap')
-diff = ((pv_max - pv_min) > 1.E-10)
+diff = ((pv_max - pv_min) > 1.E-8)
 pv_max[diff == 0] = 0
 i2, i1 = where(pv[it,:,:] == pv_max)
 

@@ -2,7 +2,8 @@
 ## Todo
 - [x] track center positions of all vortices
 - [x] print position into a table
-- [ ] plot vortex positions
+- [x] plot vortex positions (1, semi-correct)
+- [ ] plot vortex positions (2)
 
 ## Sep 29, 2021
 ### Redo the intruder experiment.
@@ -43,6 +44,18 @@ N8 | 83.5 | 314.8
 - b1: first test case (~10 min)
 ```bash
 mpiexec -n 64 ./polar_vortex.ex -i sp161211.inp > log.b1 &
+```
+Vortices rotate too fast
+
+- b2: reduce phi0 to 5.26E4
+```bash
+mpiexec -n 64 ./polar_vortex.ex -i sp161211-b2.inp > log.b2 &
+```
+That works. The whole structure slows down
+
+- b3: long-time integration
+```bash
+mpiexec -n 64 ./polar_vortex.ex -i sp161211-b3.inp > log.b3 &
 ```
 
 ## References

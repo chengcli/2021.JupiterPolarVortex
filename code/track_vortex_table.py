@@ -17,8 +17,8 @@ def order_position(x2, x1, p2, p1):
     return array(y2), array(y1)
 
 # read data
-case = 'sp161211'
-data = Dataset('../data/%s-b1-main.nc' % case, 'r')
+case = 'sp161211-b2'
+data = Dataset('../data/%s-main.nc' % case, 'r')
 time = data['time'][:]
 x1 = data['x1'][:]
 x2 = data['x2'][:]
@@ -37,7 +37,7 @@ with open('%s_positions.txt' % case, 'w') as file:
     for it in range(len(pv)):
         pv_max = filters.maximum_filter(pv[it,:,:], 10, mode = 'wrap')
         pv_min = filters.minimum_filter(pv[it,:,:], 10, mode = 'wrap')
-        diff = ((pv_max - pv_min) > 1.E-10)
+        diff = ((pv_max - pv_min) > 1.E-8)
         pv_max[diff == 0] = 0
         i2, i1 = where(pv[it,:,:] == pv_max)
         print(it, i2)
